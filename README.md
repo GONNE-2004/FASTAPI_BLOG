@@ -7,4 +7,8 @@
 
 ## 08-06-2026
 
-*learnt about using Jinja2 syntax, webmanifest, Jinja2 inheritance, using name method in the decorators which allows url to point to the exact page and not be as one, using "kurl_for" which allows flexible path generation and it's automatic
+*learnt about using Jinja2 syntax, webmanifest, Jinja2 inheritance, using name method in the decorators which allows url to point to the exact page and not be as one, using "url_for" which allows flexible path generation and it's automatic
+
+## 01-07-2026
+
+*learnt pydantic corey where he talked annotation, field, configDict and model and field validators, literals, uuid, serectstr, emailstr and more, all are in the learning_pydantic folder
