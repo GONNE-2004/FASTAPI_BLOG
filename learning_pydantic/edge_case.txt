@@ -1,0 +1,31 @@
+##Pydantic follows mathematical comparison operators:
+gt = >
+ge = >=
+lt = <
+le = <=
+
+String → Number Coercion:
+-"20" can be parsed without ambiguity into an integer.
+
+Float → Int Coercion:
+-Pydantic avoids lossy conversions.
+*20.0 is exactly the integer 20. so it will parsed easily
+*20.8 would require discarding .8, so validation fails.
+
+String → Bool Coercion:
+*User(active="maybe") will fail validation why??
+*User(active="no") & User(active="yes") will pass validation
+-Pydantic has a predefined set of recognized boolean strings. "maybe" is not one of them.
+Common accepted values:
+| True     | False     |
+| -------- | --------- |
+| `"true"` | `"false"` |
+| `"1"`    | `"0"`     |
+| `"yes"`  | `"no"`    |
+| `"on"`   | `"off"`   |
+| `"y"`    | `"n"`     |
+
+-Pydantic follows Python's type system unless strict validation is enabled.
+-boolean is a subclass of integer
+-NOTE: Accept conversions that are safe and unambiguous.
+Reject conversions that lose information or cannot be interpreted reliably.
