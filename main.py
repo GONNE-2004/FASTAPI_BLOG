@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from starlette.exceptions import HTTPException as starletteHTTPException
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 import models
 from database import Base, engine, get_db
@@ -71,8 +71,10 @@ def user_posts_page(
     )
 
 
-@app.get(
-    "/api/users", response_model=list[PostResponse], status_code=status.HTTP_201_CREATED
+@app.post(
+    "/api/users",
+    response_model=UserResponse,
+    status_code=status.HTTP_201_CREATED,
 )
 def create_user(user: UserCreate, db: Annotated[Session, Depends(get_db)]):
     result = db.execute(
@@ -168,17 +170,18 @@ def get_post(post_id: int, db: Annotated[Session, Depends(get_db)]):
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
 
 
-app.exception_handler(starletteHTTPException)
-def general_http_exception_handler(request: Request, exception: starletteHTTPException):
+@app.exception_handler(StarletteHTTPException)
+def general_http_exception_handler(request: Request, exception: StarletteHTTPException):
     message = (
         exception.detail
-        if exception
+        if exception.detail
         else "An error occurred. Please check your request and try again."
     )
 
     if request.url.path.startswith("/api"):
         return JSONResponse(
-            status_code=exception.status_code, content={"detail: message"}
+            status_code=exception.status_code,
+            content={"detail": message}
         )
 
     return templates.TemplateResponse(
