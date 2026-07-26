@@ -9,5 +9,13 @@
     "selectinload",
     "sessionmaker",
     "torturial"
-  ]
+  ],
+  "zenMode.hideLineNumbers": false,
+  "zenMode.restore": false,
+  "files.autoSave": "afterDelay",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.mouseWheelZoom": true,
+  "editor.formatOnPaste": true,
+  "editor.autoIndentOnPaste": false,
+  "editor.wordWrap": "on"
 }
